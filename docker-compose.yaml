@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    container_name: node-app
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    environment:
+      - APP_PORT=9090
+    volumes:
+      - ./logs:/app/logs
