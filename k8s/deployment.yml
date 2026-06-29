@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: inode
+  labels:
+    app: inode-app
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: inode-app
+
+  template:
+    metadata:
+      labels:
+        app: inode-app
+
+    spec:
+      containers:
+        - name: inode-container
+          image: ghcr.io/asaber121/inode:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+
