@@ -79,6 +79,7 @@ await connect();
 
 app.get("/mine", (req, res) => res.json({ message: "MINE IS ARTOIRAS" }) )
 app.get("/mine2", (req, res) => res.json({ message: "Artorias is back" }) )
+app.get("/mine3", (req, res) => res.json({ message: "Artorias is back" }) )
 
 app.get("/health", async (req, res) => {
   try {
