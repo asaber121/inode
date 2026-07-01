@@ -31,6 +31,4 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           push: true
-          tags: |
-            ghcr.io/asaber121/inode:latest
-            ghcr.io/asaber/inode:${{ github.sha }}
+          tags: ghcr.io/asaber121/inode:latest
