@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: inode
+  namespace: inode
+
+spec:
+  replicas: 2
+
+  strategy:
+    type: RollingUpdate
+
+  selector:
+    matchLabels:
+      app: inode
+
+  template:
+
+    metadata:
+      labels:
+        app: inode
+
+    spec:
+
+      imagePullSecrets:
+        - name: ghcr-secret
+
+      containers:
+
+        - name: inode
+
+          image: ghcr.io/asaber121/inode:latest
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 9090
+
+          envFrom:
+            - secretRef:
+                name: app-secret
+
+          resources:
+
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 9090
+
+            initialDelaySeconds: 20
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 9090
+
+            initialDelaySeconds: 10
+            periodSeconds: 5
