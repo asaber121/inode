@@ -76,6 +76,9 @@ await connect();
 //
 // Health
 //
+
+app.get("/mine", (req, res) => res.json({ message: "MINE IS ARTOIRAS" }) )
+
 app.get("/health", async (req, res) => {
   try {
     await db.query("SELECT 1");
